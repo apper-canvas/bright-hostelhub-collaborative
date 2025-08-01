@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "bookingId": 1,
+    "guestName": "John Smith",
+    "amount": 180.00,
+    "paymentMethod": "credit_card",
+    "date": "2024-01-15T10:30:00Z",
+    "status": "paid",
+    "transactionId": "TXN-001-2024",
+    "receiptNumber": "RCP-001-2024"
+  },
+  {
+    "Id": 2,
+    "bookingId": 2,
+    "guestName": "Sarah Johnson",
+    "amount": 120.00,
+    "paymentMethod": "debit_card",
+    "date": "2024-01-16T14:45:00Z",
+    "status": "paid",
+    "transactionId": "TXN-002-2024",
+    "receiptNumber": "RCP-002-2024"
+  },
+  {
+    "Id": 3,
+    "bookingId": 3,
+    "guestName": "Mike Chen",
+    "amount": 90.00,
+    "paymentMethod": "paypal",
+    "date": "2024-01-17T09:15:00Z",
+    "status": "paid",
+    "transactionId": "TXN-003-2024",
+    "receiptNumber": "RCP-003-2024"
+  },
+  {
+    "Id": 4,
+    "bookingId": 4,
+    "guestName": "Emma Wilson",
+    "amount": 200.00,
+    "paymentMethod": "bank_transfer",
+    "date": "2024-01-18T16:20:00Z",
+    "status": "pending",
+    "transactionId": "TXN-004-2024",
+    "receiptNumber": null
+  },
+  {
+    "Id": 5,
+    "bookingId": 5,
+    "guestName": "David Brown",
+    "amount": 150.00,
+    "paymentMethod": "credit_card",
+    "date": "2024-01-19T11:30:00Z",
+    "status": "refunded",
+    "transactionId": "TXN-005-2024",
+    "receiptNumber": "RCP-005-2024"
+  }
+]

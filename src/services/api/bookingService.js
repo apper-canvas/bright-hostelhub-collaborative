@@ -127,3 +127,14 @@ export const cancelBooking = async (id) => {
   bookings[index].status = 'cancelled';
   return { ...bookings[index] };
 };
+
+export const updateBookingPaymentStatus = async (id, paymentStatus) => {
+  await new Promise(resolve => setTimeout(resolve, 200));
+  const index = bookings.findIndex(b => b.Id === parseInt(id));
+  if (index === -1) {
+    throw new Error("Booking not found");
+  }
+  
+  bookings[index].paymentStatus = paymentStatus;
+  return { ...bookings[index] };
+};
