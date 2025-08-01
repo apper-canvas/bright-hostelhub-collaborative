@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import PageHeader from "@/components/molecules/PageHeader";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
-import Modal from "@/components/atoms/Modal";
+import { Modal } from "@/components/atoms/Modal";
 import Badge from "@/components/atoms/Badge";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
