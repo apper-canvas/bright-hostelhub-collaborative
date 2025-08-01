@@ -11,7 +11,28 @@
     "checkOutDate": "2024-01-20T11:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 35,
-    "totalAmount": 175
+    "totalAmount": 175,
+    "staffNotes": "Frequent guest, prefers bottom bunk. Very quiet and respectful.",
+    "stays": [
+      {
+        "checkInDate": "2023-11-10T15:00:00.000Z",
+        "checkOutDate": "11/15/2023 10:00:00 AMZ",
+        "roomId": 1,
+        "bedNumber": 2,
+        "pricePerNight": 35,
+        "totalAmount": 175,
+        "notes": "First stay, very satisfied with service"
+      },
+      {
+        "checkInDate": "2023-12-05T16:30:00.000Z",
+        "checkOutDate": "2023-12-10T11:00:00.000Z",
+        "roomId": 1,
+        "bedNumber": 2,
+        "pricePerNight": 35,
+        "totalAmount": 175,
+        "notes": "Return guest, requested same bed"
+      }
+    ]
   },
   {
     "id": 2,
@@ -25,7 +46,19 @@
     "checkOutDate": "2024-01-22T10:30:00.000Z",
     "status": "checked-in",
     "pricePerNight": 35,
-    "totalAmount": 210
+    "totalAmount": 210,
+    "staffNotes": "Student traveler, always pays on time. Likes early check-in when possible.",
+    "stays": [
+      {
+        "checkInDate": "2023-10-20T14:00:00.000Z",
+        "checkOutDate": "2023-10-25T10:00:00.000Z",
+        "roomId": 2,
+        "bedNumber": 1,
+        "pricePerNight": 32,
+        "totalAmount": 160,
+        "notes": "Student discount applied"
+      }
+    ]
   },
   {
     "id": 3,
@@ -39,7 +72,8 @@
     "checkOutDate": "2024-01-19T12:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 35,
-    "totalAmount": 175
+    "totalAmount": 175,
+    "stays": []
   },
   {
     "id": 4,
@@ -53,7 +87,27 @@
     "checkOutDate": "2024-01-23T11:30:00.000Z",
     "status": "checked-in",
     "pricePerNight": 35,
-    "totalAmount": 210
+    "totalAmount": 210,
+    "staffNotes": "Business traveler, prefers quiet environment for work calls.",
+    "stays": [
+      {
+        "checkInDate": "2023-09-15T13:00:00.000Z",
+        "checkOutDate": "2023-09-20T11:00:00.000Z",
+        "roomId": 3,
+        "pricePerNight": 85,
+        "totalAmount": 425,
+        "notes": "Business trip, requested private room"
+      },
+      {
+        "checkInDate": "2023-11-01T14:30:00.000Z",
+        "checkOutDate": "2023-11-05T10:00:00.000Z",
+        "roomId": 1,
+        "bedNumber": 6,
+        "pricePerNight": 35,
+        "totalAmount": 140,
+        "notes": "Regular business travel"
+      }
+    ]
   },
   {
     "id": 5,
@@ -66,7 +120,8 @@
     "checkOutDate": "2024-01-21T10:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 85,
-    "totalAmount": 425
+    "totalAmount": 425,
+    "stays": []
   },
   {
     "id": 6,
@@ -79,7 +134,9 @@
     "checkOutDate": "2024-01-21T10:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 85,
-    "totalAmount": 425
+    "totalAmount": 425,
+    "staffNotes": "Traveling with partner David Wilson. Prefers private accommodations.",
+    "stays": []
   },
   {
     "id": 7,
@@ -93,7 +150,18 @@
     "checkOutDate": "2024-01-20T11:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 35,
-    "totalAmount": 175
+    "totalAmount": 175,
+    "stays": [
+      {
+        "checkInDate": "2023-08-10T15:30:00.000Z",
+        "checkOutDate": "2023-08-15T10:00:00.000Z",
+        "roomId": 5,
+        "bedNumber": 1,
+        "pricePerNight": 35,
+        "totalAmount": 175,
+        "notes": "Backpacker, very social guest"
+      }
+    ]
   },
   {
     "id": 8,
@@ -107,7 +175,8 @@
     "checkOutDate": "2024-01-22T10:30:00.000Z",
     "status": "checked-in",
     "pricePerNight": 35,
-    "totalAmount": 210
+    "totalAmount": 210,
+    "stays": []
   },
   {
     "id": 9,
@@ -121,7 +190,28 @@
     "checkOutDate": "2024-01-24T11:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 32,
-    "totalAmount": 224
+    "totalAmount": 224,
+    "staffNotes": "Long-term guest, very reliable. Considering extended stay rates.",
+    "stays": [
+      {
+        "checkInDate": "2023-07-01T14:00:00.000Z",
+        "checkOutDate": "2023-07-15T10:00:00.000Z",
+        "roomId": 6,
+        "bedNumber": 1,
+        "pricePerNight": 32,
+        "totalAmount": 448,
+        "notes": "Extended stay, applied weekly discount"
+      },
+      {
+        "checkInDate": "2023-12-15T13:00:00.000Z",
+        "checkOutDate": "2023-12-22T11:00:00.000Z",
+        "roomId": 6,
+        "bedNumber": 1,
+        "pricePerNight": 32,
+        "totalAmount": 224,
+        "notes": "Holiday stay, same bed preference"
+      }
+    ]
   },
   {
     "id": 10,
@@ -135,7 +225,8 @@
     "checkOutDate": "2024-01-25T10:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 32,
-    "totalAmount": 224
+    "totalAmount": 224,
+    "stays": []
   },
   {
     "id": 11,
@@ -149,7 +240,8 @@
     "checkOutDate": "2024-01-21T11:30:00.000Z",
     "status": "checked-in",
     "pricePerNight": 38,
-    "totalAmount": 190
+    "totalAmount": 190,
+    "stays": []
   },
   {
     "id": 12,
@@ -163,7 +255,8 @@
     "checkOutDate": "2024-01-23T10:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 38,
-    "totalAmount": 228
+    "totalAmount": 228,
+    "stays": []
   },
   {
     "id": 13,
@@ -176,6 +269,67 @@
     "checkOutDate": "2024-01-25T11:00:00.000Z",
     "status": "checked-in",
     "pricePerNight": 65,
-    "totalAmount": 455
+    "totalAmount": 455,
+    "stays": []
+  },
+  {
+    "id": 14,
+    "name": "Amanda Foster",
+    "email": "amanda.foster@email.com",
+    "phone": "+1 (555) 444-5555",
+    "idNumber": "DL888999000",
+    "roomId": 2,
+    "bedNumber": 2,
+    "checkInDate": "2023-12-20T14:00:00.000Z",
+    "checkOutDate": "2023-12-25T10:00:00.000Z",
+    "status": "checked-out",
+    "pricePerNight": 32,
+    "totalAmount": 160,
+    "staffNotes": "Holiday guest, very appreciative of festive decorations.",
+    "stays": [
+      {
+        "checkInDate": "2023-06-15T15:00:00.000Z",
+        "checkOutDate": "2023-06-20T10:00:00.000Z",
+        "roomId": 2,
+        "bedNumber": 2,
+        "pricePerNight": 32,
+        "totalAmount": 160,
+        "notes": "Summer vacation, loved the hostel atmosphere"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Carlos Mendez",
+    "email": "carlos.mendez@email.com",
+    "phone": "+1 (555) 666-7777",
+    "idNumber": "PP222333444",
+    "roomId": 1,
+    "bedNumber": 5,
+    "checkInDate": "2023-11-25T16:00:00.000Z",
+    "checkOutDate": "2023-11-30T11:00:00.000Z",
+    "status": "checked-out",
+    "pricePerNight": 35,
+    "totalAmount": 175,
+    "stays": [
+      {
+        "checkInDate": "2023-03-10T14:30:00.000Z",
+        "checkOutDate": "2023-03-15T10:00:00.000Z",
+        "roomId": 1,
+        "bedNumber": 5,
+        "pricePerNight": 35,
+        "totalAmount": 175,
+        "notes": "Spring break visit"
+      },
+      {
+        "checkInDate": "2023-07-20T15:30:00.000Z",
+        "checkOutDate": "2023-07-25T10:00:00.000Z",
+        "roomId": 1,
+        "bedNumber": 5,
+        "pricePerNight": 35,
+        "totalAmount": 175,
+        "notes": "Summer return visit"
+      }
+    ]
   }
 ]

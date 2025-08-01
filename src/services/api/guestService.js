@@ -90,5 +90,26 @@ export const getActiveGuests = async () => {
 
 export const getGuestStayHistory = async (guestId) => {
   await new Promise(resolve => setTimeout(resolve, 200));
-  return guests.filter(guest => guest.id === parseInt(guestId)).map(guest => ({ ...guest }));
+  const guest = guests.find(g => g.id === parseInt(guestId));
+  if (!guest) {
+    throw new Error("Guest not found");
+  }
+  
+  // Return the guest's stay history, including current stay
+  const stayHistory = guest.stays || [];
+  
+  // Add current stay if checked in
+  if (guest.status === 'checked-in') {
+    stayHistory.push({
+      checkInDate: guest.checkInDate,
+      checkOutDate: guest.checkOutDate,
+      roomId: guest.roomId,
+      bedNumber: guest.bedNumber,
+      pricePerNight: guest.pricePerNight,
+      totalAmount: guest.totalAmount,
+      status: guest.status
+    });
+  }
+  
+  return stayHistory.map(stay => ({ ...stay }));
 };
