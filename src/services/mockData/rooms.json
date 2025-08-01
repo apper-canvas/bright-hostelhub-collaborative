@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "number": "101",
+    "type": "dorm",
+    "capacity": 6,
+    "currentOccupancy": 4,
+    "status": "occupied",
+    "floor": 1,
+    "pricePerNight": 35
+  },
+  {
+    "id": 2,
+    "number": "102",
+    "type": "dorm",
+    "capacity": 8,
+    "currentOccupancy": 0,
+    "status": "available",
+    "floor": 1,
+    "pricePerNight": 32
+  },
+  {
+    "id": 3,
+    "number": "103",
+    "type": "private",
+    "capacity": 2,
+    "currentOccupancy": 2,
+    "status": "occupied",
+    "floor": 1,
+    "pricePerNight": 85
+  },
+  {
+    "id": 4,
+    "number": "104",
+    "type": "private",
+    "capacity": 2,
+    "currentOccupancy": 0,
+    "status": "cleaning",
+    "floor": 1,
+    "pricePerNight": 85
+  },
+  {
+    "id": 5,
+    "number": "201",
+    "type": "dorm",
+    "capacity": 6,
+    "currentOccupancy": 6,
+    "status": "occupied",
+    "floor": 2,
+    "pricePerNight": 35
+  },
+  {
+    "id": 6,
+    "number": "202",
+    "type": "dorm",
+    "capacity": 8,
+    "currentOccupancy": 3,
+    "status": "occupied",
+    "floor": 2,
+    "pricePerNight": 32
+  },
+  {
+    "id": 7,
+    "number": "203",
+    "type": "private",
+    "capacity": 2,
+    "currentOccupancy": 0,
+    "status": "available",
+    "floor": 2,
+    "pricePerNight": 85
+  },
+  {
+    "id": 8,
+    "number": "204",
+    "type": "private",
+    "capacity": 2,
+    "currentOccupancy": 0,
+    "status": "maintenance",
+    "floor": 2,
+    "pricePerNight": 85
+  },
+  {
+    "id": 9,
+    "number": "301",
+    "type": "dorm",
+    "capacity": 4,
+    "currentOccupancy": 2,
+    "status": "occupied",
+    "floor": 3,
+    "pricePerNight": 38
+  },
+  {
+    "id": 10,
+    "number": "302",
+    "type": "dorm",
+    "capacity": 4,
+    "currentOccupancy": 0,
+    "status": "available",
+    "floor": 3,
+    "pricePerNight": 38
+  },
+  {
+    "id": 11,
+    "number": "303",
+    "type": "private",
+    "capacity": 1,
+    "currentOccupancy": 1,
+    "status": "occupied",
+    "floor": 3,
+    "pricePerNight": 65
+  },
+  {
+    "id": 12,
+    "number": "304",
+    "type": "private",
+    "capacity": 1,
+    "currentOccupancy": 0,
+    "status": "available",
+    "floor": 3,
+    "pricePerNight": 65
+  }
+]
