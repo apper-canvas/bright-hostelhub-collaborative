@@ -12,15 +12,253 @@ import Button from "@/components/atoms/Button";
 import { getAllRooms, updateRoom } from "@/services/api/roomService";
 import { getAllGuests, createGuest, updateGuest } from "@/services/api/guestService";
 
+// Search Bar Component
+const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const filterOptions = {
+    bedType: [
+      { value: 'all', label: 'All Types' },
+      { value: 'dorm', label: 'Dorm' },
+      { value: 'private', label: 'Private' }
+    ],
+    status: [
+      { value: 'all', label: 'All Status' },
+      { value: 'available', label: 'Available' },
+      { value: 'occupied', label: 'Occupied' },
+      { value: 'maintenance', label: 'Maintenance' },
+      { value: 'cleaning', label: 'Cleaning' }
+    ],
+    floor: [
+      { value: 'all', label: 'All Floors' },
+      { value: 1, label: 'Floor 1' },
+      { value: 2, label: 'Floor 2' },
+      { value: 3, label: 'Floor 3' }
+    ]
+  };
+
+  const handleFilterChange = (category, value) => {
+    setFilters(prev => ({
+      ...prev,
+      [category]: value
+    }));
+  };
+
+  const clearAllFilters = () => {
+    setSearchTerm('');
+    setFilters({
+      bedType: 'all',
+      status: 'all',
+      floor: 'all'
+    });
+    setIsDropdownOpen(false);
+  };
+
+  const hasActiveFilters = searchTerm || filters.bedType !== 'all' || filters.status !== 'all' || filters.floor !== 'all';
+
+  return (
+    <div className="bg-white rounded-lg shadow-card p-4 mb-6">
+      <div className="flex flex-col sm:flex-row gap-4">
+        {/* Search Input */}
+        <div className="flex-1 relative">
+          <div className="relative">
+            <ApperIcon 
+              name="Search" 
+              size={20} 
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            />
+            <input
+              type="text"
+              placeholder="Search rooms by number, type, or status..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+            />
+          </div>
+        </div>
+
+        {/* Filter Dropdown */}
+        <div className="relative">
+          <Button
+            variant="outline"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="px-4 py-3 flex items-center gap-2 min-w-[140px] justify-between"
+          >
+            <ApperIcon name="Filter" size={16} />
+            Filters
+            <ApperIcon 
+              name={isDropdownOpen ? "ChevronUp" : "ChevronDown"} 
+              size={16} 
+            />
+          </Button>
+
+          {isDropdownOpen && (
+            <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+              <div className="p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-medium text-gray-900">Filter Rooms</h3>
+                  {hasActiveFilters && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={clearAllFilters}
+                      className="text-primary-600 hover:text-primary-700"
+                    >
+                      Clear All
+                    </Button>
+                  )}
+                </div>
+
+                {/* Bed Type Filter */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Bed Type
+                  </label>
+                  <select
+                    value={filters.bedType}
+                    onChange={(e) => handleFilterChange('bedType', e.target.value)}
+                    className="w-full p-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  >
+                    {filterOptions.bedType.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Status Filter */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Status
+                  </label>
+                  <select
+                    value={filters.status}
+                    onChange={(e) => handleFilterChange('status', e.target.value)}
+                    className="w-full p-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  >
+                    {filterOptions.status.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Floor Filter */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Floor
+                  </label>
+                  <select
+                    value={filters.floor}
+                    onChange={(e) => handleFilterChange('floor', e.target.value === 'all' ? 'all' : parseInt(e.target.value))}
+                    className="w-full p-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  >
+                    {filterOptions.floor.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex justify-end">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Apply Filters
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Clear Search */}
+        {hasActiveFilters && (
+          <Button
+            variant="ghost"
+            onClick={clearAllFilters}
+            className="px-3 py-3 text-gray-500 hover:text-gray-700"
+          >
+            <ApperIcon name="X" size={16} />
+          </Button>
+        )}
+      </div>
+
+      {/* Active Filters Display */}
+      {hasActiveFilters && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {searchTerm && (
+            <div className="inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm">
+              <ApperIcon name="Search" size={12} />
+              Search: "{searchTerm}"
+              <button
+                onClick={() => setSearchTerm('')}
+                className="ml-1 hover:text-primary-900"
+              >
+                <ApperIcon name="X" size={12} />
+              </button>
+            </div>
+          )}
+          {filters.bedType !== 'all' && (
+            <div className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+              <ApperIcon name="Bed" size={12} />
+              Type: {filterOptions.bedType.find(opt => opt.value === filters.bedType)?.label}
+              <button
+                onClick={() => handleFilterChange('bedType', 'all')}
+                className="ml-1 hover:text-blue-900"
+              >
+                <ApperIcon name="X" size={12} />
+              </button>
+            </div>
+          )}
+          {filters.status !== 'all' && (
+            <div className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+              <ApperIcon name="CheckCircle" size={12} />
+              Status: {filterOptions.status.find(opt => opt.value === filters.status)?.label}
+              <button
+                onClick={() => handleFilterChange('status', 'all')}
+                className="ml-1 hover:text-green-900"
+              >
+                <ApperIcon name="X" size={12} />
+              </button>
+            </div>
+          )}
+          {filters.floor !== 'all' && (
+            <div className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">
+              <ApperIcon name="Building" size={12} />
+              Floor: {filters.floor}
+              <button
+                onClick={() => handleFilterChange('floor', 'all')}
+                className="ml-1 hover:text-purple-900"
+              >
+                <ApperIcon name="X" size={12} />
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Rooms = () => {
-  const [rooms, setRooms] = useState([]);
+const [rooms, setRooms] = useState([]);
   const [guests, setGuests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filter, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({
+    bedType: 'all',
+    status: 'all',
+    floor: 'all'
+  });
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [modalType, setModalType] = useState(null);
-
   const loadData = async () => {
     try {
       setLoading(true);
@@ -122,17 +360,43 @@ const Rooms = () => {
     }
   };
 
-  const filteredRooms = rooms.filter(room => {
-    if (filter === 'all') return true;
-    return room.status === filter;
+const filteredRooms = rooms.filter(room => {
+    // Text search filter
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      const matchesSearch = 
+        room.number.toLowerCase().includes(searchLower) ||
+        room.type.toLowerCase().includes(searchLower) ||
+        room.status.toLowerCase().includes(searchLower) ||
+        room.floor.toString().includes(searchLower);
+      
+      if (!matchesSearch) return false;
+    }
+
+    // Bed type filter
+    if (filters.bedType !== 'all' && room.type !== filters.bedType) {
+      return false;
+    }
+
+    // Status filter
+    if (filters.status !== 'all' && room.status !== filters.status) {
+      return false;
+    }
+
+    // Floor filter
+    if (filters.floor !== 'all' && room.floor !== filters.floor) {
+      return false;
+    }
+
+    return true;
   });
 
   const statusCounts = {
-    all: rooms.length,
-    available: rooms.filter(r => r.status === 'available').length,
-    occupied: rooms.filter(r => r.status === 'occupied').length,
-    maintenance: rooms.filter(r => r.status === 'maintenance').length,
-    cleaning: rooms.filter(r => r.status === 'cleaning').length
+    all: filteredRooms.length,
+    available: filteredRooms.filter(r => r.status === 'available').length,
+    occupied: filteredRooms.filter(r => r.status === 'occupied').length,
+    maintenance: filteredRooms.filter(r => r.status === 'maintenance').length,
+    cleaning: filteredRooms.filter(r => r.status === 'cleaning').length
   };
 
   if (loading) return <Loading type="rooms" />;
@@ -146,30 +410,42 @@ const Rooms = () => {
         icon="Bed"
       />
 
-      {/* Filter Bar */}
-      <div className="bg-white rounded-lg shadow-card p-4">
-        <div className="flex flex-wrap gap-2">
-          {[
-            { key: 'all', label: 'All Rooms', icon: 'Grid3x3' },
-            { key: 'available', label: 'Available', icon: 'CheckCircle' },
-            { key: 'occupied', label: 'Occupied', icon: 'User' },
-            { key: 'maintenance', label: 'Maintenance', icon: 'Wrench' },
-            { key: 'cleaning', label: 'Cleaning', icon: 'Sparkles' }
-          ].map(({ key, label, icon }) => (
-            <Button
-              key={key}
-              variant={filter === key ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setFilter(key)}
-              className="relative"
-            >
-              <ApperIcon name={icon} size={16} className="mr-2" />
-              {label}
-              <span className="ml-2 bg-white/20 text-xs px-2 py-0.5 rounded-full">
-                {statusCounts[key]}
-              </span>
-            </Button>
-          ))}
+{/* Search Bar */}
+      <SearchBar 
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filters={filters}
+        setFilters={setFilters}
+      />
+
+      {/* Quick Stats */}
+      <div className="bg-white rounded-lg shadow-card p-4 mb-6">
+        <div className="flex flex-wrap gap-4">
+          <div className="flex items-center gap-2">
+            <ApperIcon name="Grid3x3" size={16} className="text-gray-500" />
+            <span className="text-sm text-gray-600">Total: </span>
+            <span className="font-semibold text-gray-900">{statusCounts.all}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ApperIcon name="CheckCircle" size={16} className="text-green-500" />
+            <span className="text-sm text-gray-600">Available: </span>
+            <span className="font-semibold text-green-600">{statusCounts.available}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ApperIcon name="User" size={16} className="text-blue-500" />
+            <span className="text-sm text-gray-600">Occupied: </span>
+            <span className="font-semibold text-blue-600">{statusCounts.occupied}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ApperIcon name="Wrench" size={16} className="text-orange-500" />
+            <span className="text-sm text-gray-600">Maintenance: </span>
+            <span className="font-semibold text-orange-600">{statusCounts.maintenance}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ApperIcon name="Sparkles" size={16} className="text-purple-500" />
+            <span className="text-sm text-gray-600">Cleaning: </span>
+            <span className="font-semibold text-purple-600">{statusCounts.cleaning}</span>
+          </div>
         </div>
       </div>
 
