@@ -7,7 +7,15 @@
     "currentOccupancy": 4,
     "status": "occupied",
     "floor": 1,
-    "pricePerNight": 35
+    "pricePerNight": 35,
+    "beds": [
+      { "number": 1, "occupied": true },
+      { "number": 2, "occupied": true },
+      { "number": 3, "occupied": false },
+      { "number": 4, "occupied": true },
+      { "number": 5, "occupied": false },
+      { "number": 6, "occupied": true }
+    ]
   },
   {
     "id": 2,
@@ -17,7 +25,17 @@
     "currentOccupancy": 0,
     "status": "available",
     "floor": 1,
-    "pricePerNight": 32
+    "pricePerNight": 32,
+    "beds": [
+      { "number": 1, "occupied": false },
+      { "number": 2, "occupied": false },
+      { "number": 3, "occupied": false },
+      { "number": 4, "occupied": false },
+      { "number": 5, "occupied": false },
+      { "number": 6, "occupied": false },
+      { "number": 7, "occupied": false },
+      { "number": 8, "occupied": false }
+    ]
   },
   {
     "id": 3,
@@ -47,7 +65,15 @@
     "currentOccupancy": 6,
     "status": "occupied",
     "floor": 2,
-    "pricePerNight": 35
+    "pricePerNight": 35,
+    "beds": [
+      { "number": 1, "occupied": true },
+      { "number": 2, "occupied": true },
+      { "number": 3, "occupied": true },
+      { "number": 4, "occupied": true },
+      { "number": 5, "occupied": true },
+      { "number": 6, "occupied": true }
+    ]
   },
   {
     "id": 6,
@@ -57,7 +83,17 @@
     "currentOccupancy": 3,
     "status": "occupied",
     "floor": 2,
-    "pricePerNight": 32
+    "pricePerNight": 32,
+    "beds": [
+      { "number": 1, "occupied": true },
+      { "number": 2, "occupied": false },
+      { "number": 3, "occupied": true },
+      { "number": 4, "occupied": false },
+      { "number": 5, "occupied": false },
+      { "number": 6, "occupied": true },
+      { "number": 7, "occupied": false },
+      { "number": 8, "occupied": false }
+    ]
   },
   {
     "id": 7,
@@ -87,7 +123,13 @@
     "currentOccupancy": 2,
     "status": "occupied",
     "floor": 3,
-    "pricePerNight": 38
+    "pricePerNight": 38,
+    "beds": [
+      { "number": 1, "occupied": true },
+      { "number": 2, "occupied": false },
+      { "number": 3, "occupied": true },
+      { "number": 4, "occupied": false }
+    ]
   },
   {
     "id": 10,
@@ -97,7 +139,13 @@
     "currentOccupancy": 0,
     "status": "available",
     "floor": 3,
-    "pricePerNight": 38
+    "pricePerNight": 38,
+    "beds": [
+      { "number": 1, "occupied": false },
+      { "number": 2, "occupied": false },
+      { "number": 3, "occupied": false },
+      { "number": 4, "occupied": false }
+    ]
   },
   {
     "id": 11,
