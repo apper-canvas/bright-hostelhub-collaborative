@@ -8,13 +8,30 @@
     "status": "occupied",
     "floor": 1,
     "pricePerNight": 35,
-    "beds": [
-      { "number": 1, "occupied": true },
-      { "number": 2, "occupied": true },
+"beds": [
+      { "number": 1, "occupied": true, "guestName": "John Smith", "checkInDate": "2024-01-15" },
+      { "number": 2, "occupied": true, "guestName": "Emma Johnson", "checkInDate": "2024-01-14" },
       { "number": 3, "occupied": false },
-      { "number": 4, "occupied": true },
+      { "number": 4, "occupied": true, "guestName": "Mike Davis", "checkInDate": "2024-01-16" },
       { "number": 5, "occupied": false },
-      { "number": 6, "occupied": true }
+      { "number": 6, "occupied": true, "guestName": "Sarah Wilson", "checkInDate": "2024-01-13" }
+    ],
+    "amenities": ["Free WiFi", "Air Conditioning", "Individual Lockers", "Shared Bathroom", "Breakfast Included"],
+    "maintenanceHistory": [
+      {
+        "type": "Plumbing Repair",
+        "description": "Fixed leaky faucet in shared bathroom",
+        "date": "2024-01-10",
+        "technician": "Carlos Rodriguez",
+        "status": "completed"
+      },
+      {
+        "type": "AC Maintenance",
+        "description": "Routine AC filter replacement and cleaning",
+        "date": "2024-01-05",
+        "technician": "Tech Team",
+        "status": "completed"
+      }
     ]
   },
   {
@@ -26,7 +43,7 @@
     "status": "available",
     "floor": 1,
     "pricePerNight": 32,
-    "beds": [
+"beds": [
       { "number": 1, "occupied": false },
       { "number": 2, "occupied": false },
       { "number": 3, "occupied": false },
@@ -35,7 +52,9 @@
       { "number": 6, "occupied": false },
       { "number": 7, "occupied": false },
       { "number": 8, "occupied": false }
-    ]
+    ],
+    "amenities": ["Free WiFi", "Air Conditioning", "Individual Lockers", "Shared Bathroom", "Breakfast Included", "24/7 Security"],
+    "maintenanceHistory": []
   },
   {
     "id": 3,
@@ -45,7 +64,17 @@
     "currentOccupancy": 2,
     "status": "occupied",
     "floor": 1,
-    "pricePerNight": 85
+"pricePerNight": 85,
+    "amenities": ["Free WiFi", "Private Bathroom", "Air Conditioning", "Mini Fridge", "Room Service"],
+    "maintenanceHistory": [
+      {
+        "type": "Room Renovation",
+        "description": "Updated bathroom fixtures and repainted walls",
+        "date": "2024-01-08",
+        "technician": "Renovation Team",
+        "status": "completed"
+      }
+    ]
   },
   {
     "id": 4,
@@ -55,7 +84,17 @@
     "currentOccupancy": 0,
     "status": "cleaning",
     "floor": 1,
-    "pricePerNight": 85
+"pricePerNight": 85,
+    "amenities": ["Free WiFi", "Private Bathroom", "Air Conditioning", "Mini Fridge"],
+    "maintenanceHistory": [
+      {
+        "type": "Deep Cleaning",
+        "description": "Post-checkout deep sanitization and maintenance check",
+        "date": "2024-01-12",
+        "technician": "Cleaning Team",
+        "status": "in-progress"
+      }
+    ]
   },
   {
     "id": 5,
@@ -66,13 +105,23 @@
     "status": "occupied",
     "floor": 2,
     "pricePerNight": 35,
-    "beds": [
-      { "number": 1, "occupied": true },
-      { "number": 2, "occupied": true },
-      { "number": 3, "occupied": true },
-      { "number": 4, "occupied": true },
-      { "number": 5, "occupied": true },
-      { "number": 6, "occupied": true }
+"beds": [
+      { "number": 1, "occupied": true, "guestName": "Alex Chen", "checkInDate": "2024-01-10" },
+      { "number": 2, "occupied": true, "guestName": "Lisa Park", "checkInDate": "2024-01-11" },
+      { "number": 3, "occupied": true, "guestName": "Tom Wilson", "checkInDate": "2024-01-09" },
+      { "number": 4, "occupied": true, "guestName": "Maria Garcia", "checkInDate": "2024-01-12" },
+      { "number": 5, "occupied": true, "guestName": "David Kim", "checkInDate": "2024-01-08" },
+      { "number": 6, "occupied": true, "guestName": "Anna Smith", "checkInDate": "2024-01-13" }
+    ],
+    "amenities": ["Free WiFi", "Air Conditioning", "Individual Lockers", "Shared Bathroom", "Breakfast Included", "Common Area"],
+    "maintenanceHistory": [
+      {
+        "type": "Electrical Check",
+        "description": "Routine electrical safety inspection",
+        "date": "2024-01-07",
+        "technician": "ElectricCo",
+        "status": "completed"
+      }
     ]
   },
   {
@@ -84,16 +133,18 @@
     "status": "occupied",
     "floor": 2,
     "pricePerNight": 32,
-    "beds": [
-      { "number": 1, "occupied": true },
+"beds": [
+      { "number": 1, "occupied": true, "guestName": "Chris Brown", "checkInDate": "2024-01-14" },
       { "number": 2, "occupied": false },
-      { "number": 3, "occupied": true },
+      { "number": 3, "occupied": true, "guestName": "Jennifer Lee", "checkInDate": "2024-01-15" },
       { "number": 4, "occupied": false },
       { "number": 5, "occupied": false },
-      { "number": 6, "occupied": true },
+      { "number": 6, "occupied": true, "guestName": "Robert Taylor", "checkInDate": "2024-01-16" },
       { "number": 7, "occupied": false },
       { "number": 8, "occupied": false }
-    ]
+    ],
+    "amenities": ["Free WiFi", "Air Conditioning", "Individual Lockers", "Shared Bathroom", "Breakfast Included", "Laundry Access"],
+    "maintenanceHistory": []
   },
   {
     "id": 7,
@@ -103,7 +154,9 @@
     "currentOccupancy": 0,
     "status": "available",
     "floor": 2,
-    "pricePerNight": 85
+"pricePerNight": 85,
+    "amenities": ["Free WiFi", "Private Bathroom", "Air Conditioning", "Mini Fridge", "Work Desk"],
+    "maintenanceHistory": []
   },
   {
     "id": 8,
@@ -113,7 +166,24 @@
     "currentOccupancy": 0,
     "status": "maintenance",
     "floor": 2,
-    "pricePerNight": 85
+"pricePerNight": 85,
+    "amenities": ["Free WiFi", "Private Bathroom", "Air Conditioning", "Mini Fridge"],
+    "maintenanceHistory": [
+      {
+        "type": "HVAC Repair",
+        "description": "Air conditioning unit replacement and testing",
+        "date": "2024-01-11",
+        "technician": "HVAC Specialists",
+        "status": "completed"
+      },
+      {
+        "type": "Plumbing Maintenance",
+        "description": "Preventive plumbing inspection and minor repairs",
+        "date": "2024-01-13",
+        "technician": "PlumbCo",
+        "status": "in-progress"
+      }
+    ]
   },
   {
     "id": 9,
@@ -124,11 +194,21 @@
     "status": "occupied",
     "floor": 3,
     "pricePerNight": 38,
-    "beds": [
-      { "number": 1, "occupied": true },
+"beds": [
+      { "number": 1, "occupied": true, "guestName": "Kevin Wang", "checkInDate": "2024-01-12" },
       { "number": 2, "occupied": false },
-      { "number": 3, "occupied": true },
+      { "number": 3, "occupied": true, "guestName": "Sophie Miller", "checkInDate": "2024-01-14" },
       { "number": 4, "occupied": false }
+    ],
+    "amenities": ["Free WiFi", "Air Conditioning", "Individual Lockers", "Shared Bathroom", "City View"],
+    "maintenanceHistory": [
+      {
+        "type": "Window Repair",
+        "description": "Replaced broken window latch for better security",
+        "date": "2024-01-09",
+        "technician": "Maintenance Team",
+        "status": "completed"
+      }
     ]
   },
   {
@@ -140,12 +220,14 @@
     "status": "available",
     "floor": 3,
     "pricePerNight": 38,
-    "beds": [
+"beds": [
       { "number": 1, "occupied": false },
       { "number": 2, "occupied": false },
       { "number": 3, "occupied": false },
       { "number": 4, "occupied": false }
-    ]
+    ],
+    "amenities": ["Free WiFi", "Air Conditioning", "Individual Lockers", "Shared Bathroom", "City View", "Reading Light"],
+    "maintenanceHistory": []
   },
   {
     "id": 11,
@@ -155,7 +237,17 @@
     "currentOccupancy": 1,
     "status": "occupied",
     "floor": 3,
-    "pricePerNight": 65
+"pricePerNight": 65,
+    "amenities": ["Free WiFi", "Private Bathroom", "Air Conditioning", "Work Desk", "City View"],
+    "maintenanceHistory": [
+      {
+        "type": "Furniture Update",
+        "description": "Replaced old desk chair with ergonomic model",
+        "date": "2024-01-06",
+        "technician": "Furniture Team",
+        "status": "completed"
+      }
+    ]
   },
   {
     "id": 12,
@@ -165,6 +257,8 @@
     "currentOccupancy": 0,
     "status": "available",
     "floor": 3,
-    "pricePerNight": 65
+"pricePerNight": 65,
+    "amenities": ["Free WiFi", "Private Bathroom", "Air Conditioning", "Work Desk", "Garden View"],
+    "maintenanceHistory": []
   }
 ]

@@ -41,10 +41,13 @@ const RoomDetailModal = ({ room, guests = [], isOpen, onClose }) => {
 
   const config = statusConfig[room.status] || statusConfig.available;
 
-  const tabs = [
+const tabs = [
     { id: "info", label: "Room Info", icon: "Info" },
     { id: "guests", label: "Guests", icon: "Users", count: roomGuests.length },
-    { id: "history", label: "History", icon: "Clock" }
+    ...(room.type === "dorm" && room.beds ? [{ id: "beds", label: "Bed Management", icon: "Bed" }] : []),
+    { id: "amenities", label: "Amenities", icon: "Star" },
+    { id: "maintenance", label: "Maintenance", icon: "Wrench" },
+    { id: "cleaning", label: "Cleaning Schedule", icon: "Calendar" }
   ];
 
   return (
@@ -100,7 +103,7 @@ const RoomDetailModal = ({ room, guests = [], isOpen, onClose }) => {
         </nav>
       </div>
 
-      <ModalContent className="max-h-96 overflow-y-auto">
+<ModalContent className="max-h-96 overflow-y-auto">
         {activeTab === "info" && (
           <div className="space-y-6">
             {/* Basic Info */}
@@ -197,13 +200,210 @@ const RoomDetailModal = ({ room, guests = [], isOpen, onClose }) => {
           </div>
         )}
 
-        {activeTab === "history" && (
-          <div className="text-center py-8">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <ApperIcon name="Clock" size={32} className="text-gray-400" />
+        {activeTab === "beds" && room.type === "dorm" && room.beds && (
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h4 className="font-medium text-gray-900">Bed Configuration</h4>
+              <span className="text-sm text-gray-600">
+                {room.beds.filter(bed => bed.occupied).length} of {room.beds.length} beds occupied
+              </span>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">History coming soon</h3>
-            <p className="text-gray-600">Room history and maintenance logs will be available here.</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {room.beds.map((bed) => (
+                <div
+                  key={bed.number}
+                  className={`p-4 border-2 rounded-lg transition-all ${
+                    bed.occupied
+                      ? "border-blue-200 bg-blue-50"
+                      : "border-emerald-200 bg-emerald-50 hover:border-emerald-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-medium text-gray-900">Bed {bed.number}</span>
+                    <Badge variant={bed.occupied ? "occupied" : "available"} className="text-xs">
+                      <ApperIcon 
+                        name={bed.occupied ? "User" : "CheckCircle"} 
+                        size={10} 
+                        className="mr-1" 
+                      />
+                      {bed.occupied ? "Occupied" : "Available"}
+                    </Badge>
+                  </div>
+                  {bed.occupied && bed.guestName && (
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium text-gray-700">{bed.guestName}</p>
+                      <p className="text-xs text-gray-600">
+                        Check-in: {bed.checkInDate ? format(new Date(bed.checkInDate), "MMM dd") : "N/A"}
+                      </p>
+                    </div>
+                  )}
+                  {bed.maintenanceStatus && (
+                    <div className="mt-2">
+                      <Badge variant="maintenance" className="text-xs">
+                        <ApperIcon name="Wrench" size={8} className="mr-1" />
+                        {bed.maintenanceStatus}
+                      </Badge>
+                    </div>
+                  )}
+                  {!bed.occupied && !bed.maintenanceStatus && (
+                    <button className="w-full mt-2 px-3 py-1 text-xs bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition-colors">
+                      <ApperIcon name="UserPlus" size={12} className="mr-1" />
+                      Assign Guest
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "amenities" && (
+          <div className="space-y-4">
+            <h4 className="font-medium text-gray-900">Room Amenities</h4>
+            {room.amenities && room.amenities.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3">
+                {room.amenities.map((amenity, index) => (
+                  <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                      <ApperIcon 
+                        name={
+                          amenity.toLowerCase().includes('wifi') ? 'Wifi' :
+                          amenity.toLowerCase().includes('ac') || amenity.toLowerCase().includes('air') ? 'Wind' :
+                          amenity.toLowerCase().includes('locker') ? 'Lock' :
+                          amenity.toLowerCase().includes('bed') ? 'Bed' :
+                          amenity.toLowerCase().includes('bathroom') ? 'Droplets' :
+                          amenity.toLowerCase().includes('towel') ? 'Shirt' :
+                          amenity.toLowerCase().includes('breakfast') ? 'Coffee' :
+                          'Star'
+                        } 
+                        size={16} 
+                        className="text-primary-600" 
+                      />
+                    </div>
+                    <span className="text-sm text-gray-700">{amenity}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <ApperIcon name="Star" size={32} className="text-gray-400" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No amenities listed</h3>
+                <p className="text-gray-600">Room amenities will be displayed here.</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === "maintenance" && (
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h4 className="font-medium text-gray-900">Maintenance History</h4>
+              <Button size="sm" variant="outline">
+                <ApperIcon name="Plus" size={14} className="mr-2" />
+                Add Record
+              </Button>
+            </div>
+            {room.maintenanceHistory && room.maintenanceHistory.length > 0 ? (
+              <div className="space-y-3">
+                {room.maintenanceHistory.map((record, index) => (
+                  <div key={index} className="p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-3 h-3 rounded-full ${
+                          record.status === 'completed' ? 'bg-emerald-500' :
+                          record.status === 'in-progress' ? 'bg-yellow-500' :
+                          'bg-red-500'
+                        }`} />
+                        <span className="font-medium text-gray-900">{record.type}</span>
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        {format(new Date(record.date), "MMM dd, yyyy")}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-2">{record.description}</p>
+                    <div className="flex items-center justify-between text-xs text-gray-500">
+                      <span>By: {record.technician}</span>
+                      <Badge 
+                        variant={
+                          record.status === 'completed' ? 'available' :
+                          record.status === 'in-progress' ? 'cleaning' :
+                          'maintenance'
+                        }
+                        className="text-xs"
+                      >
+                        {record.status}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <ApperIcon name="Wrench" size={32} className="text-gray-400" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No maintenance records</h3>
+                <p className="text-gray-600">Maintenance history will appear here.</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === "cleaning" && (
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h4 className="font-medium text-gray-900">Cleaning Schedule</h4>
+              <Button size="sm" variant="outline">
+                <ApperIcon name="Calendar" size={14} className="mr-2" />
+                Schedule Cleaning
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <ApperIcon name="Sparkles" size={16} className="text-yellow-600" />
+                    <span className="font-medium text-gray-900">Deep Cleaning</span>
+                  </div>
+                  <Badge variant="cleaning" className="text-xs">Scheduled</Badge>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Weekly deep cleaning and sanitization</p>
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <span>Next: {format(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), "MMM dd, yyyy")}</span>
+                  <span>Duration: 2 hours</span>
+                </div>
+              </div>
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <ApperIcon name="CheckCircle" size={16} className="text-emerald-600" />
+                    <span className="font-medium text-gray-900">Daily Housekeeping</span>
+                  </div>
+                  <Badge variant="available" className="text-xs">Completed</Badge>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Bed making, towel replacement, basic cleaning</p>
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <span>Last: {format(new Date(), "MMM dd, yyyy")}</span>
+                  <span>By: Maria Santos</span>
+                </div>
+              </div>
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <ApperIcon name="Droplets" size={16} className="text-blue-600" />
+                    <span className="font-medium text-gray-900">Bathroom Deep Clean</span>
+                  </div>
+                  <Badge variant="occupied" className="text-xs">In Progress</Badge>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Thorough bathroom sanitization and restocking</p>
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <span>Started: Today, 2:00 PM</span>
+                  <span>ETA: 30 minutes</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </ModalContent>
