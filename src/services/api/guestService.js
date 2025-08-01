@@ -20,7 +20,7 @@ export const createGuest = async (guestData) => {
   await new Promise(resolve => setTimeout(resolve, 300));
   const newGuest = {
     ...guestData,
-    id: Math.max(...guests.map(g => g.id)) + 1
+    Id: Math.max(...guests.map(g => g.Id || g.id || 0)) + 1
   };
   guests.push(newGuest);
   return { ...newGuest };
