@@ -1,7 +1,7 @@
+// Note: Using 'id' field for consistency with existing data structure
 import guestsData from "@/services/mockData/guests.json";
 
 let guests = [...guestsData];
-
 export const getAllGuests = async () => {
   await new Promise(resolve => setTimeout(resolve, 200));
   return [...guests];
