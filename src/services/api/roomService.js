@@ -96,13 +96,3 @@ export const getAvailableBeds = async (roomId) => {
   
   return availableBeds;
 };
-
-export const deleteRoom = async (id) => {
-  await new Promise(resolve => setTimeout(resolve, 200));
-  const index = rooms.findIndex(r => r.id === parseInt(id));
-  if (index === -1) {
-    throw new Error("Room not found");
-  }
-  rooms.splice(index, 1);
-  return true;
-};

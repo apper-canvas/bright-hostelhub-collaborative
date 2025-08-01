@@ -92,13 +92,3 @@ export const getGuestStayHistory = async (guestId) => {
   await new Promise(resolve => setTimeout(resolve, 200));
   return guests.filter(guest => guest.id === parseInt(guestId)).map(guest => ({ ...guest }));
 };
-
-export const deleteGuest = async (id) => {
-  await new Promise(resolve => setTimeout(resolve, 200));
-  const index = guests.findIndex(g => g.id === parseInt(id));
-  if (index === -1) {
-    throw new Error("Guest not found");
-  }
-  guests.splice(index, 1);
-  return true;
-};
