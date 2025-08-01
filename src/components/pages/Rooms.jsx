@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import * as XLSX from "xlsx";
 import PageHeader from "@/components/molecules/PageHeader";
 import RoomCard from "@/components/molecules/RoomCard";
 import CheckInModal from "@/components/organisms/CheckInModal";
@@ -11,7 +12,6 @@ import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import { getAllRooms, updateRoom } from "@/services/api/roomService";
 import { getAllGuests, createGuest, updateGuest } from "@/services/api/guestService";
-
 // Search Bar Component
 const SearchBar = ({ searchTerm, setSearchTerm, filters, setFilters }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -398,6 +398,71 @@ const filteredRooms = rooms.filter(room => {
     maintenance: filteredRooms.filter(r => r.status === 'maintenance').length,
     cleaning: filteredRooms.filter(r => r.status === 'cleaning').length
   };
+// Export functionality
+  const [showExportMenu, setShowExportMenu] = useState(false);
+
+  const prepareExportData = (rooms) => {
+    return rooms.map(room => ({
+      'Room Number': room.number,
+      'Type': room.type.charAt(0).toUpperCase() + room.type.slice(1),
+      'Floor': room.floor,
+      'Capacity': room.capacity,
+      'Current Occupancy': room.currentOccupancy,
+      'Status': room.status.charAt(0).toUpperCase() + room.status.slice(1),
+      'Price per Night': `$${room.pricePerNight}`,
+      'Amenities': room.amenities ? room.amenities.join(', ') : '',
+      'Occupancy Rate': `${Math.round((room.currentOccupancy / room.capacity) * 100)}%`
+    }));
+  };
+
+  const exportToCSV = () => {
+    const exportData = prepareExportData(filteredRooms);
+    const csv = [
+      Object.keys(exportData[0]).join(','),
+      ...exportData.map(row => Object.values(row).map(value => 
+        typeof value === 'string' && value.includes(',') ? `"${value}"` : value
+      ).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `rooms-export-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setShowExportMenu(false);
+    toast.success(`Successfully exported ${filteredRooms.length} rooms to CSV`);
+  };
+
+  const exportToExcel = () => {
+    const exportData = prepareExportData(filteredRooms);
+    const ws = XLSX.utils.json_to_sheet(exportData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Rooms');
+    
+    // Set column widths
+    const colWidths = [
+      { wch: 12 }, // Room Number
+      { wch: 10 }, // Type
+      { wch: 8 },  // Floor
+      { wch: 10 }, // Capacity
+      { wch: 16 }, // Current Occupancy
+      { wch: 12 }, // Status
+      { wch: 14 }, // Price per Night
+      { wch: 40 }, // Amenities
+      { wch: 14 }  // Occupancy Rate
+    ];
+    ws['!cols'] = colWidths;
+
+    XLSX.writeFile(wb, `rooms-export-${new Date().toISOString().split('T')[0]}.xlsx`);
+    
+    setShowExportMenu(false);
+    toast.success(`Successfully exported ${filteredRooms.length} rooms to Excel`);
+  };
 
   if (loading) return <Loading type="rooms" />;
   if (error) return <Error message={error} onRetry={loadData} />;
@@ -448,9 +513,46 @@ const filteredRooms = rooms.filter(room => {
           </div>
         </div>
       </div>
-
-      {/* Room Grid */}
+{/* Room Grid */}
       <div className="bg-white rounded-lg shadow-card p-6">
+        {/* Export Button */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-lg font-semibold text-gray-900">
+            Rooms ({filteredRooms.length})
+          </h2>
+          <div className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowExportMenu(!showExportMenu)}
+              className="flex items-center gap-2"
+            >
+              <ApperIcon name="Download" size={16} />
+              Export Data
+              <ApperIcon name="ChevronDown" size={14} />
+            </Button>
+            
+            {showExportMenu && (
+              <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[140px] z-10">
+                <button
+                  onClick={exportToCSV}
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                >
+                  <ApperIcon name="FileText" size={14} />
+                  Export as CSV
+                </button>
+                <button
+                  onClick={exportToExcel}
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                >
+                  <ApperIcon name="FileSpreadsheet" size={14} />
+                  Export as Excel
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredRooms.map(room => (
             <RoomCard
